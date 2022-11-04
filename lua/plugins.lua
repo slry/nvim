@@ -12,7 +12,6 @@ return require('packer').startup(function(use)
     run = 'python3 -m chadtree deps'
   }
   use 'tiagofumo/vim-nerdtree-syntax-highlight'
---  use 'ryanoasis/vim-devicons'
   use 'airblade/vim-gitgutter'
   use 'neovim/nvim-lspconfig'
   use 'windwp/nvim-autopairs'
@@ -30,7 +29,7 @@ return require('packer').startup(function(use)
   }
   use 'tpope/vim-fugitive'
   use 'github/copilot.vim'
---  use 'jparise/vimtex'
+  --  use 'jparise/vimtex'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'

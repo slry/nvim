@@ -3,13 +3,13 @@ vim.keymap.set('n', '<C-l>', ':tabn<cr>')
 vim.keymap.set('n', '<C-h>', ':tabp<cr>')
 
 -- cd to current directory
-vim.keymap.set('n', '<leader>cd', ':cd %:h<cr>', {silent = true})
+vim.keymap.set('n', '<leader>cd', ':cd %:h<cr>', { silent = true })
 
 -- Terminal normal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 
 -- Open a .vimrc in a new tab
-vim.keymap.set('n', '<F7>', ':tabedit ~/.config/nvim/init.lua<cr>', {silent = true})
+vim.keymap.set('n', '<F7>', ':tabedit ~/.config/nvim/init.lua<cr>', { silent = true })
 
 -- Move in Vimdows
 vim.keymap.set('n', '<up>', '<C-w>k')

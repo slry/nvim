@@ -2,7 +2,9 @@ local createJavaProject = function()
   local companyName = vim.fn.input('Enter company name: ')
   local projectName = vim.fn.input('Enter project name: ')
   print('Creating project ' .. projectName .. '...')
-  io.popen("mvn archetype:generate -DgroupId=" .. companyName .. " -DartifactId=" .. projectName .. " -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false")
+  io.popen("mvn archetype:generate -DgroupId=" ..
+    companyName ..
+    " -DartifactId=" .. projectName .. " -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false")
   print('Project created!')
 end
 

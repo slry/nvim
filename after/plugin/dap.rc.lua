@@ -40,22 +40,22 @@ dap.configurations.python = {
 }
 
 dap.adapters.codelldb = {
-    type = 'server',
-    host = '127.0.0.1',
-    port = 13000
+  type = 'server',
+  host = '127.0.0.1',
+  port = 13000
 }
 
 dap.configurations.c = {
   {
-        type = 'codelldb';
-        request = 'launch';
-        program = function()
-            StartServer()
-            return vim.fn.getcwd() .. '/${fileBasenameNoExtension}'
-        end;
-        --program = '${fileDirname}/${fileBasenameNoExtension}',
-        cwd = '${workspaceFolder}';
-        terminal = 'integrated';
+    type = 'codelldb';
+    request = 'launch';
+    program = function()
+      StartServer()
+      return vim.fn.getcwd() .. '/${fileBasenameNoExtension}'
+    end;
+    --program = '${fileDirname}/${fileBasenameNoExtension}',
+    cwd = '${workspaceFolder}';
+    terminal = 'integrated';
   }
 }
 
@@ -72,4 +72,3 @@ dap.listeners.before.event_exited["dapui_config"] = function()
 end
 
 dapui.setup()
-
