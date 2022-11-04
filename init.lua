@@ -12,7 +12,8 @@ vim.cmd([[
 
 vim.g.coq_settings = {
   auto_start = 'shut-up',
-  keymaps = {
-    jump_to_mark = '<leader>ll',
+  keymap = {
+    recommended = false,
+    jump_to_mark = '<leader>ll'
   }
 }

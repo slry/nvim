@@ -14,7 +14,7 @@ return require('packer').startup(function(use)
   use 'tiagofumo/vim-nerdtree-syntax-highlight'
   use 'airblade/vim-gitgutter'
   use 'neovim/nvim-lspconfig'
-  use 'windwp/nvim-autopairs'
+  use 'jiangmiao/auto-pairs'
   use {
     'ms-jpq/coq_nvim',
     branch = 'coq'
@@ -29,7 +29,6 @@ return require('packer').startup(function(use)
   }
   use 'tpope/vim-fugitive'
   use 'github/copilot.vim'
-  --  use 'jparise/vimtex'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
