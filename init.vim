@@ -7,13 +7,12 @@ Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'neovim/nvim-lspconfig'
-Plug 'echasnovski/mini.pairs', { 'branch': 'stable' }
+Plug 'windwp/nvim-autopairs'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-fugitive'
 Plug 'github/copilot.vim'
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 Plug 'lervag/vimtex'
@@ -23,6 +22,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'williamboman/mason.nvim'
 Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-jdtls'
 Plug 'rcarriga/nvim-dap-ui'
 call plug#end()
 
@@ -37,8 +37,12 @@ nmap <C-h> :tabp<CR>
 " Telescope keymaps
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 
+" Terminal
+nnoremap <leader>tt <cmd>FloatermNew<cr>
+
 " Vim keymaps
-nnoremap <Leader>y "*y
+nnoremap <leader>y "*y
+nnoremap <silent> <leader>cd :cd %:h<cr>
 tnoremap <Esc> <C-\><C-n>
 
 " open a .vimrc in a new tab
@@ -143,7 +147,7 @@ let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_method = 'latexmk'
 
 " COQ configuration
-let g:coq_settings = { 'auto_start': 'shut-up', 'keymap': {'jump_to_mark': '<leader>ll'} }
+let g:coq_settings = { 'auto_start': 'shut-up', 'keymap': {'jump_to_mark': '<leader>ll', } }
 
 lua << EOF
 vim.o.mouse = "a"
@@ -254,6 +258,13 @@ lsp.jdtls.setup(coq.lsp_ensure_capabilities({
 lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities({
   on_attach = on_attach,
   flags = lsp_flags,
+  settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
 }))
 
 local dap = require('dap')
@@ -324,7 +335,7 @@ end
 
 dapui.setup()
 
-require("mini.pairs").setup()
+require("nvim-autopairs").setup {}
 
 function startServer()
   vim.cmd('FloatermNew! --silent --autoclose=1 ~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb --port 13000')
