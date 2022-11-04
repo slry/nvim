@@ -26,6 +26,13 @@ lualine.setup {
     lualine_y = {  },
     lualine_z = {  },
   },
-  tabline = {},
-  extensions = { 'fzf', 'nvim-tree' },
+  tabline = {
+    lualine_a = {},
+    lualine_b = {'branch'},
+    lualine_c = {'filename'},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {'tabs'}
+  },
+  extensions = { 'nvim-dap-ui', 'chadtree' },
 }

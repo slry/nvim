@@ -4,7 +4,7 @@ local dapui = require("dapui")
 
 function StartServer()
   vim.cmd('FloatermNew! --silent --autoclose=1 ~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb --port 13000')
-  vim.cmd('call CompileDebugCProject()')
+  CompileDebugCProject()
 end
 
 dap.adapters.python = {
@@ -72,3 +72,4 @@ dap.listeners.before.event_exited["dapui_config"] = function()
 end
 
 dapui.setup()
+
