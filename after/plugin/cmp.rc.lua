@@ -3,6 +3,8 @@ if not status then
   return
 end
 
+local lspkind = require('lspkind')
+
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -19,9 +21,17 @@ cmp.setup({
       select = true,
     }),
   }),
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol_text',
+      maxwidth = 50,
+      ellipsis_char = '...',
+    })
+  },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'vsnip' }
+    { name = 'vsnip' },
+    { name = 'nvim_lua' }
   }, {
     { name = 'buffer' },
   }),
