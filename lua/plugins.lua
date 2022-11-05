@@ -35,4 +35,15 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-dap'
   use 'mfussenegger/nvim-jdtls'
   use 'rcarriga/nvim-dap-ui'
+
+  -- cmp stuff
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+
+  -- snips
+  use 'hrsh7th/vim-vsnip'
+  use 'hrsh7th/cmp-vsnip'
 end)
