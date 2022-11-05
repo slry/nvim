@@ -2,7 +2,7 @@ local mason_registry = require('mason-registry')
 local dap = require('dap')
 local dapui = require("dapui")
 
-function StartServer()
+local StartServer = function()
   vim.cmd('FloatermNew! --silent --autoclose=1 ~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb --port 13000')
   CompileDebugCProject()
 end
@@ -53,7 +53,6 @@ dap.configurations.c = {
       StartServer()
       return vim.fn.getcwd() .. '/${fileBasenameNoExtension}'
     end;
-    --program = '${fileDirname}/${fileBasenameNoExtension}',
     cwd = '${workspaceFolder}';
     terminal = 'integrated';
   }

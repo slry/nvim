@@ -43,13 +43,6 @@ local lsp_flags = {
 local lsp = require('lspconfig')
 local coq = require('coq')
 
-vim.g.coq_settings = {
-  auto_start = 'shut-up',
-  keymap = {
-    jump_to_mark = '<leader>ll',
-  }
-}
-
 lsp.pyright.setup(coq.lsp_ensure_capabilities({
   on_attach = on_attach,
   flags = lsp_flags,
