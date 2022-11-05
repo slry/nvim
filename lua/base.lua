@@ -1,6 +1,8 @@
 vim.wo.number = true
 
 vim.o.mouse = "a"
+vim.o.termguicolors = true
+
 vim.opt.cindent = true
 vim.opt.tabstop = 2
 vim.opt.expandtab = true
