@@ -41,24 +41,23 @@ local lsp_flags = {
 }
 
 local lsp = require('lspconfig')
-local coq = require('coq')
 
-lsp.pyright.setup(coq.lsp_ensure_capabilities({
+lsp.pyright.setup({
   on_attach = on_attach,
   flags = lsp_flags,
-}))
+})
 
-lsp.clangd.setup(coq.lsp_ensure_capabilities({
+lsp.clangd.setup({
   on_attach = on_attach,
   flags = lsp_flags,
-}))
+})
 
-lsp.jdtls.setup(coq.lsp_ensure_capabilities({
+lsp.jdtls.setup({
   on_attach = on_attach,
   flags = lsp_flags,
-}))
+})
 
-lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities({
+lsp.sumneko_lua.setup({
   on_attach = on_attach,
   flags = lsp_flags,
   settings = {
@@ -68,4 +67,4 @@ lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities({
       }
     }
   }
-}))
+})

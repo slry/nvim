@@ -16,14 +16,6 @@ return require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'jiangmiao/auto-pairs'
   use {
-    'ms-jpq/coq_nvim',
-    branch = 'coq'
-  }
-  use {
-    'ms-jpq/coq.artifacts',
-    branch = 'artifacts'
-  }
-  use {
     'ms-jpq/coq.thirdparty',
     branch = '3p'
   }
