@@ -14,7 +14,7 @@ return require('packer').startup(function(use)
   use 'tiagofumo/vim-nerdtree-syntax-highlight'
   use 'airblade/vim-gitgutter'
   use 'neovim/nvim-lspconfig'
-  use 'jiangmiao/auto-pairs'
+  use 'windwp/nvim-autopairs'
   use {
     'ms-jpq/coq.thirdparty',
     branch = '3p'
