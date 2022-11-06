@@ -2,6 +2,7 @@ vim.wo.number = true
 
 vim.o.mouse = "a"
 vim.o.completeopt = "menu,menuone,noselect"
+
 vim.opt.cindent = true
 vim.opt.tabstop = 2
 vim.opt.expandtab = true
