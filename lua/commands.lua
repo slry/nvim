@@ -2,14 +2,14 @@ local createJavaProject = function()
   local companyName = vim.fn.input('Enter company name: ')
   local projectName = vim.fn.input('Enter project name: ')
   print('Creating project ' .. projectName .. '...')
-  io.popen("mvn archetype:generate -DgroupId=" ..
+  os.execute("mvn archetype:generate -DgroupId=" ..
     companyName ..
     " -DartifactId=" .. projectName .. " -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false")
   print('Project created!')
 end
 
 local compileJavaProject = function()
-  io.popen('mvn package')
+  os.execute('mvn package')
   local projectName = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
   vim.cmd('FloatermNew! --wintype=split java -jar target/' .. projectName .. '-1.0-SNAPSHOT.jar')
 end
@@ -20,13 +20,13 @@ end
 
 local compileCProject = function()
   local fileName = vim.fn.fnamemodify(vim.fn.expand('%'), ':t:r')
-  io.popen('gcc -g -o ' .. fileName .. ' ' .. fileName .. '.c')
+  os.execute('gcc -o ' .. fileName .. ' ' .. fileName .. '.c')
   vim.cmd('FloatermNew! --wintype=split ./' .. fileName)
 end
 
 CompileDebugCProject = function()
   local fileName = vim.fn.fnamemodify(vim.fn.expand('%'), ':t:r')
-  io.popen('gcc -g -o ' .. fileName .. ' ' .. fileName .. '.c')
+  os.execute('gcc -g -o ' .. fileName .. ' ' .. fileName .. '.c')
 end
 
 local compileProject = function()

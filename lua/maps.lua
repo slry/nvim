@@ -37,7 +37,7 @@ vim.keymap.set('n', '<leader>dl', '<cmd>lua require"dap".run_last()<cr>')
 vim.keymap.set('n', '<F3>', '<cmd>lua require"dapui".toggle()<cr>')
 
 -- resize window
-vim.keymap.set('n', '<C-Up>', ':resize -2<CR>')
-vim.keymap.set('n', '<C-Down>', ':resize +2<CR>')
-vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>')
-vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>')
+vim.keymap.set('n', '<C-up>', ':resize -2<cr>')
+vim.keymap.set('n', '<C-down>', ':resize +2<cr>')
+vim.keymap.set('n', '<C-left>', ':vertical resize -2<cr>')
+vim.keymap.set('n', '<C-right>', ':vertical resize +2<cr>')
