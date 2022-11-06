@@ -16,14 +16,6 @@ return require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'jiangmiao/auto-pairs'
   use {
-    'ms-jpq/coq_nvim',
-    branch = 'coq'
-  }
-  use {
-    'ms-jpq/coq.artifacts',
-    branch = 'artifacts'
-  }
-  use {
     'ms-jpq/coq.thirdparty',
     branch = '3p'
   }
@@ -43,4 +35,19 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-dap'
   use 'mfussenegger/nvim-jdtls'
   use 'rcarriga/nvim-dap-ui'
+
+  -- cmp stuff
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/cmp-nvim-lua'
+
+  -- snips
+  use 'hrsh7th/vim-vsnip'
+  use 'hrsh7th/cmp-vsnip'
+
+  -- lspkind
+  use 'onsails/lspkind-nvim'
 end)
