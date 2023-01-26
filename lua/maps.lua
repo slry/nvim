@@ -17,8 +17,7 @@ vim.keymap.set('n', '<down>', '<C-w>j')
 vim.keymap.set('n', '<left>', '<C-w>h')
 vim.keymap.set('n', '<right>', '<C-w>l')
 
--- toggle CHADtree
-vim.keymap.set('n', '<C-n>', '<cmd>CHADopen<cr>')
+vim.keymap.set('n', '<C-n>', '<cmd>Neotree<cr>', { silent = true })
 
 -- open Telescope
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')

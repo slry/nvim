@@ -15,7 +15,7 @@ local compileJavaProject = function()
 end
 
 local compilePythonProject = function()
-  vim.cmd('FloatermNew! --wintype=split python3 %')
+  vim.cmd('FloatermNew! --height=10 --wintype=split python3 %')
 end
 
 local compileCProject = function()

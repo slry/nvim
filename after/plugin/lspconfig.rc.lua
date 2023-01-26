@@ -68,3 +68,18 @@ lsp.sumneko_lua.setup({
     }
   }
 })
+
+lsp.texlab.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
+
+lsp.tsserver.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
+
+lsp.tailwindcss.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
