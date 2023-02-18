@@ -15,6 +15,9 @@ return require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
+  -- web dev icons
+  use 'nvim-tree/nvim-web-devicons'
+
   -- tree
   use {
     "nvim-neo-tree/neo-tree.nvim",
@@ -25,12 +28,6 @@ return require('packer').startup(function(use)
       "MunifTanjim/nui.nvim",
     }
   }
-  -- use {
-  --   'ms-jpq/chadtree',
-  --   branch = 'chad',
-  --   run = 'python3 -m chadtree deps'
-  -- }
-  -- use 'tiagofumo/vim-nerdtree-syntax-highlight'
 
   -- gitgutter
   use 'airblade/vim-gitgutter'
@@ -42,8 +39,8 @@ return require('packer').startup(function(use)
 
   use 'tpope/vim-fugitive'
 
-  -- copilot
-  use 'github/copilot.vim'
+  -- tab out of pairs
+  use 'abecodes/tabout.nvim'
 
   -- highlight
   use {
@@ -80,6 +77,26 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/cmp-nvim-lua'
 
+  use {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function()
+      require('copilot_cmp').setup()
+    end
+  }
+
+  -- copilot
+  use { "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end,
+  }
+
   -- snips
   use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/cmp-vsnip'
@@ -95,5 +112,11 @@ return require('packer').startup(function(use)
 
   -- jupyter python
   use { "untitled-ai/jupyter_ascending.vim" }
+
+  -- leap
+  use 'ggandor/leap.nvim'
+
+  -- react extract
+  use 'napmn/react-extract.nvim'
 
 end)

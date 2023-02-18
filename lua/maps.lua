@@ -1,6 +1,8 @@
--- Move tabs
-vim.keymap.set('n', '<C-l>', ':tabn<cr>')
-vim.keymap.set('n', '<C-h>', ':tabp<cr>')
+-- move in insert mode
+vim.keymap.set('i', '<C-k>', '<C-o>gk')
+vim.keymap.set('i', '<C-j>', '<C-o>gj')
+vim.keymap.set('i', '<C-h>', '<Left>')
+vim.keymap.set('i', '<C-l>', '<Right>')
 
 -- cd to current directory
 vim.keymap.set('n', '<leader>cd', ':cd %:h<cr>', { silent = true })
@@ -40,3 +42,8 @@ vim.keymap.set('n', '<C-up>', ':resize -2<cr>')
 vim.keymap.set('n', '<C-down>', ':resize +2<cr>')
 vim.keymap.set('n', '<C-left>', ':vertical resize -2<cr>')
 vim.keymap.set('n', '<C-right>', ':vertical resize +2<cr>')
+
+vim.keymap.set('n', '<leader>y', '"+y')
+
+-- react extract
+vim.keymap.set('v', '<leader>re', require("react-extract").extract_to_new_file)
