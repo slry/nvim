@@ -13,11 +13,15 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 -- Open a .vimrc in a new tab
 vim.keymap.set('n', '<F7>', ':tabedit ~/.config/nvim/init.lua<cr>', { silent = true })
 
+-- Cycle through tabs
+vim.keymap.set('n', '<C-]>', ':tabnext<cr>', { silent = true })
+vim.keymap.set('n', '<C-[>', ':tabprevious<cr>', { silent = true })
+
 -- Move in Vimdows
-vim.keymap.set('n', '<up>', '<C-w>k')
-vim.keymap.set('n', '<down>', '<C-w>j')
-vim.keymap.set('n', '<left>', '<C-w>h')
-vim.keymap.set('n', '<right>', '<C-w>l')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
 
 vim.keymap.set('n', '<C-n>', '<cmd>Neotree<cr>', { silent = true })
 
@@ -43,7 +47,8 @@ vim.keymap.set('n', '<C-down>', ':resize +2<cr>')
 vim.keymap.set('n', '<C-left>', ':vertical resize -2<cr>')
 vim.keymap.set('n', '<C-right>', ':vertical resize +2<cr>')
 
-vim.keymap.set('n', '<leader>y', '"+y')
+-- copy to clipboard
+vim.keymap.set('v', '<leader>y', '"+y')
 
 -- react extract
 vim.keymap.set('v', '<leader>re', require("react-extract").extract_to_new_file)

@@ -119,4 +119,18 @@ return require('packer').startup(function(use)
   -- react extract
   use 'napmn/react-extract.nvim'
 
+  -- formatting
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'MunifTanjim/prettier.nvim'
+
+  use "MunifTanjim/nui.nvim"
+
+  use({
+    'jackMort/ChatGPT.nvim',
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  })
 end)

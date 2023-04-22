@@ -32,7 +32,12 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 
   -- Autoformatting on saving
-  vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+  if client.server_capabilities.documentFormattingProvider then
+    vim.api.nvim_command [[augroup Format]]
+    vim.api.nvim_command [[autocmd! * <buffer>]]
+    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+    vim.api.nvim_command [[augroup END]]
+  end
 end
 
 local lsp_flags = {
@@ -105,7 +110,9 @@ lsp.tsserver.setup({
 
       vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
     end
-  }
+  },
+  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+  cmd = { "typescript-language-server", '--stdio' }
 })
 
 lsp.tailwindcss.setup({

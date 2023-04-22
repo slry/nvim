@@ -77,23 +77,37 @@ cmp.event:on("menu_closed", function()
 end)
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+local lsp = require('lspconfig')
 
-require('lspconfig').pyright.setup({
+lsp.cssls.setup({
   capabilities = capabilities,
 })
 
-require('lspconfig').clangd.setup({
+lsp.cssmodules_ls.setup({
   capabilities = capabilities,
 })
 
-require('lspconfig').jdtls.setup({
+lsp.pyright.setup({
   capabilities = capabilities,
 })
 
-require('lspconfig').lua_ls.setup({
+lsp.clangd.setup({
   capabilities = capabilities,
 })
 
-require('lspconfig').texlab.setup({
+lsp.jdtls.setup({
+  capabilities = capabilities,
+})
+
+lsp.lua_ls.setup({
+  capabilities = capabilities,
+})
+
+lsp.texlab.setup({
+  capabilities = capabilities,
+})
+
+lsp.html.setup({
   capabilities = capabilities,
 })
