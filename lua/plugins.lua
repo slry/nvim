@@ -77,25 +77,9 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/cmp-nvim-lua'
 
-  use {
-    "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function()
-      require('copilot_cmp').setup()
-    end
-  }
 
   -- copilot
-  use { "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
-  }
+  use 'github/copilot.vim'
 
   -- snips
   use 'hrsh7th/vim-vsnip'
@@ -116,21 +100,9 @@ return require('packer').startup(function(use)
   -- leap
   use 'ggandor/leap.nvim'
 
-  -- react extract
-  use 'napmn/react-extract.nvim'
-
   -- formatting
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'MunifTanjim/prettier.nvim'
 
   use "MunifTanjim/nui.nvim"
-
-  use({
-    'jackMort/ChatGPT.nvim',
-    requires = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
-  })
 end)
