@@ -1,6 +1,8 @@
--- Move tabs
-vim.keymap.set('n', '<C-l>', ':tabn<cr>')
-vim.keymap.set('n', '<C-h>', ':tabp<cr>')
+-- move in insert mode
+vim.keymap.set('i', '<C-k>', '<C-o>gk')
+vim.keymap.set('i', '<C-j>', '<C-o>gj')
+vim.keymap.set('i', '<C-h>', '<Left>')
+vim.keymap.set('i', '<C-l>', '<Right>')
 
 -- cd to current directory
 vim.keymap.set('n', '<leader>cd', ':cd %:h<cr>', { silent = true })
@@ -11,14 +13,18 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 -- Open a .vimrc in a new tab
 vim.keymap.set('n', '<F7>', ':tabedit ~/.config/nvim/init.lua<cr>', { silent = true })
 
--- Move in Vimdows
-vim.keymap.set('n', '<up>', '<C-w>k')
-vim.keymap.set('n', '<down>', '<C-w>j')
-vim.keymap.set('n', '<left>', '<C-w>h')
-vim.keymap.set('n', '<right>', '<C-w>l')
+-- Move buffers
+vim.keymap.set('n', '<M-j>', ':bn<cr>', { silent = true })
+vim.keymap.set('n', '<M-k>', ':bp<cr>', { silent = true })
+vim.keymap.set('n', '<leader>bd', ':bd<cr>', { silent = true })
 
--- toggle CHADtree
-vim.keymap.set('n', '<C-n>', '<cmd>CHADopen<cr>')
+-- Move in Vimdows
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
+
+vim.keymap.set('n', '<C-n>', '<cmd>Neotree<cr>', { silent = true })
 
 -- open Telescope
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
@@ -37,7 +43,16 @@ vim.keymap.set('n', '<leader>dl', '<cmd>lua require"dap".run_last()<cr>')
 vim.keymap.set('n', '<F3>', '<cmd>lua require"dapui".toggle()<cr>')
 
 -- resize window
-vim.keymap.set('n', '<C-Up>', ':resize -2<CR>')
-vim.keymap.set('n', '<C-Down>', ':resize +2<CR>')
-vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>')
-vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>')
+vim.keymap.set('n', '<C-up>', ':resize -2<cr>')
+vim.keymap.set('n', '<C-down>', ':resize +2<cr>')
+vim.keymap.set('n', '<C-left>', ':vertical resize -2<cr>')
+vim.keymap.set('n', '<C-right>', ':vertical resize +2<cr>')
+
+-- copy to clipboard
+vim.keymap.set('v', '<leader>y', '"+y')
+
+-- copilot accept remap
+vim.cmd([[
+  imap <silent><script><expr> <leader><Tab> copilot#Accept("\<CR>")
+  let g:copilot_no_tab_map = v:true
+]])

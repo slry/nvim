@@ -2,27 +2,29 @@ local mason_registry = require('mason-registry')
 local dap = require('dap')
 local dapui = require("dapui")
 
+local mason_path = "~/.local/share/nvim/mason/packages/"
+
 local StartServer = function()
-  vim.cmd('FloatermNew! --silent --autoclose=1 ~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb --port 13000')
+  vim.cmd(
+    'FloatermNew! --silent --autoclose=1 ~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb --port 13000')
   CompileDebugCProject()
 end
 
 dap.adapters.python = {
-  type = 'executable';
-  command = mason_registry.get_package("debugpy"):get_install_path() .. "/venv/bin/python";
-  args = { '-m', 'debugpy.adapter' };
+  type = 'executable',
+  command = mason_path .. "debugpy/" .. "venv/bin/python",
+  args = { '-m', 'debugpy.adapter' },
 }
 
 dap.configurations.python = {
   {
     -- The first three options are required by nvim-dap
-    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
-    request = 'launch';
-    name = "Launch file";
-
+    type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
+    request = 'launch',
+    name = "Launch file",
     -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
 
-    program = "${file}"; -- This configuration will launch the current file if used.
+    program = "${file}", -- This configuration will launch the current file if used.
     pythonPath = function()
       -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
       -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
@@ -35,7 +37,7 @@ dap.configurations.python = {
       else
         return '/usr/bin/python'
       end
-    end;
+    end,
   },
 }
 
@@ -47,14 +49,14 @@ dap.adapters.codelldb = {
 
 dap.configurations.c = {
   {
-    type = 'codelldb';
-    request = 'launch';
+    type = 'codelldb',
+    request = 'launch',
     program = function()
       StartServer()
       return vim.fn.getcwd() .. '/${fileBasenameNoExtension}'
-    end;
-    cwd = '${workspaceFolder}';
-    terminal = 'integrated';
+    end,
+    cwd = '${workspaceFolder}',
+    terminal = 'integrated',
   }
 }
 

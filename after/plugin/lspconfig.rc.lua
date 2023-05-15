@@ -32,7 +32,12 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 
   -- Autoformatting on saving
-  vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+  if client.server_capabilities.documentFormattingProvider then
+    vim.api.nvim_command [[augroup Format]]
+    vim.api.nvim_command [[autocmd! * <buffer>]]
+    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format{async = false}]]
+    vim.api.nvim_command [[augroup END]]
+  end
 end
 
 local lsp_flags = {
@@ -57,7 +62,7 @@ lsp.jdtls.setup({
   flags = lsp_flags,
 })
 
-lsp.sumneko_lua.setup({
+lsp.lua_ls.setup({
   on_attach = on_attach,
   flags = lsp_flags,
   settings = {
@@ -67,4 +72,50 @@ lsp.sumneko_lua.setup({
       }
     }
   }
+})
+
+lsp.texlab.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
+
+local function filter(arr, fn)
+  if type(arr) ~= "table" then
+    return arr
+  end
+
+  local filtered = {}
+  for k, v in pairs(arr) do
+    if fn(v, k, arr) then
+      table.insert(filtered, v)
+    end
+  end
+
+  return filtered
+end
+
+local function filterReactDTS(value)
+  return string.match(value.targetUri, 'react/ts5.0/index.d.ts') == nil
+end
+
+lsp.tsserver.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+  handlers = {
+    ['textDocument/definition'] = function(err, result, method, ...)
+      if vim.tbl_islist(result) and #result > 1 then
+        local filtered_result = filter(result, filterReactDTS)
+        return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
+      end
+
+      vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
+    end
+  },
+  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+  cmd = { "typescript-language-server", '--stdio' }
+})
+
+lsp.tailwindcss.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
 })
