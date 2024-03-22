@@ -12,3 +12,4 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = false
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
+vim.o.sessionoptions = "blank,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
