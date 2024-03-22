@@ -14,17 +14,15 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 vim.keymap.set('n', '<F7>', ':tabedit ~/.config/nvim/init.lua<cr>', { silent = true })
 
 -- Move buffers
-vim.keymap.set('n', '<M-j>', ':bn<cr>', { silent = true })
-vim.keymap.set('n', '<M-k>', ':bp<cr>', { silent = true })
+vim.keymap.set('n', '<M-k>', ':bn<cr>', { silent = true })
+vim.keymap.set('n', '<M-j>', ':bp<cr>', { silent = true })
 vim.keymap.set('n', '<leader>bd', ':bd<cr>', { silent = true })
-
--- Move in Vimdows
-vim.keymap.set('n', '<C-k>', '<C-w>k')
-vim.keymap.set('n', '<C-j>', '<C-w>j')
-vim.keymap.set('n', '<C-h>', '<C-w>h')
-vim.keymap.set('n', '<C-l>', '<C-w>l')
+vim.keymap.set('n', '<leader>bc', ':%bd|e#<cr>', { silent = true })
 
 vim.keymap.set('n', '<C-n>', '<cmd>Neotree<cr>', { silent = true })
+
+-- Greatest remap ever
+vim.keymap.set('x', '<space>p', '"_dP')
 
 -- open Telescope
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
@@ -51,8 +49,15 @@ vim.keymap.set('n', '<C-right>', ':vertical resize +2<cr>')
 -- copy to clipboard
 vim.keymap.set('v', '<leader>y', '"+y')
 
+-- split
+vim.keymap.set('n', '<leader>vs', ':vsplit<cr>')
+vim.keymap.set('n', '<leader>hs', ':split<cr>')
+
 -- copilot accept remap
 vim.cmd([[
   imap <silent><script><expr> <leader><Tab> copilot#Accept("\<CR>")
   let g:copilot_no_tab_map = v:true
 ]])
+
+-- autosession
+vim.keymap.set('n', '<leader>ss', require('auto-session.session-lens').search_session, { noremap = true })

@@ -19,7 +19,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  --vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wl', function()
@@ -95,7 +95,7 @@ local function filter(arr, fn)
 end
 
 local function filterReactDTS(value)
-  return string.match(value.targetUri, 'react/ts5.0/index.d.ts') == nil
+  return string.match(value.targetUri, 'react/index.d.ts') == nil
 end
 
 lsp.tsserver.setup({
@@ -116,6 +116,31 @@ lsp.tsserver.setup({
 })
 
 lsp.tailwindcss.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
+
+lsp.racket_langserver.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
+
+lsp.hls.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
+
+lsp.dockerls.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
+
+lsp.yamlls.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+})
+
+lsp.ansiblels.setup({
   on_attach = on_attach,
   flags = lsp_flags,
 })

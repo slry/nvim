@@ -2,6 +2,7 @@ vim.cmd([[
   syntax on
   colors gruvbox
   hi Normal guibg=NONE ctermbg=NONE
+  hi Visual guibg=#505050 guifg=NONE gui=NONE
   hi Error NONE
 ]])
 
@@ -30,3 +31,11 @@ vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { fg = '#FE8019', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { fg = '#FE8019', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = '#FE8019', bg = 'NONE' })
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+
+-- git gutter highlights
+
+vim.api.nvim_set_hl(0, 'GitGutterAdd', { fg = '#6CC644', bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'GitGutterChange', { fg = '#FABD2F', bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'GitGutterDelete', { fg = '#FB4934', bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'GitGutterChangeDelete', { fg = '#FE8019', bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'SignColumn', { fg = '#282828', bg = 'NONE' })

@@ -6,6 +6,9 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- colorscheme
+  --use 'ellisonleao/gruvbox.nvim'
+
+  -- old vim
   use 'morhetz/gruvbox'
   use 'sainnhe/everforest'
 
@@ -21,7 +24,7 @@ return require('packer').startup(function(use)
   -- tree
   use {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
+    branch = "v3.x",
     requires = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -39,13 +42,11 @@ return require('packer').startup(function(use)
 
   use 'tpope/vim-fugitive'
 
-  -- tab out of pairs
-  use 'abecodes/tabout.nvim'
-
   -- highlight
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = ':TSUpdate',
+    tag = 'v0.9.0'
   }
 
   -- terminal
@@ -55,16 +56,11 @@ return require('packer').startup(function(use)
   use 'nvim-lua/plenary.nvim'
   use {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.0'
+    tag = '0.1.4'
   }
 
   -- mason
   use 'williamboman/mason.nvim'
-
-  -- dap
-  use 'mfussenegger/nvim-dap'
-  use 'mfussenegger/nvim-jdtls'
-  use 'rcarriga/nvim-dap-ui'
 
   -- LaTeX stuff
   use 'lervag/vimtex'
@@ -77,6 +73,8 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/cmp-nvim-lua'
 
+  -- surround
+  use 'kylechui/nvim-surround'
 
   -- copilot
   use 'github/copilot.vim'
@@ -94,15 +92,23 @@ return require('packer').startup(function(use)
     run = function() vim.fn["mkdp#util#install"]() end,
   })
 
-  -- jupyter python
-  use { "untitled-ai/jupyter_ascending.vim" }
-
   -- leap
   use 'ggandor/leap.nvim'
 
   -- formatting
-  use 'jose-elias-alvarez/null-ls.nvim'
-  use 'MunifTanjim/prettier.nvim'
+  use "stevearc/conform.nvim"
+
+  -- linting
+  use "mfussenegger/nvim-lint"
 
   use "MunifTanjim/nui.nvim"
+
+  -- react styled components
+  use "styled-components/vim-styled-components"
+
+  -- auto session
+  use "rmagatti/auto-session"
+
+  -- tmux integration
+  use "christoomey/vim-tmux-navigator"
 end)
