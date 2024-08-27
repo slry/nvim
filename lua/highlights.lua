@@ -1,10 +1,10 @@
 vim.cmd([[
   syntax on
-  colors gruvbox
-  hi Normal guibg=NONE ctermbg=NONE
-  hi Visual guibg=#505050 guifg=NONE gui=NONE
   hi Error NONE
 ]])
+--  colors gruvbox
+--  hi Normal guibg=NONE ctermbg=NONE
+--  hi Visual guibg=#505050 guifg=NONE gui=NONE
 
 -- CMP highlights
 -- gray

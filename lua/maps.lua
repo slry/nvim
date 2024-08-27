@@ -24,8 +24,14 @@ vim.keymap.set('n', '<C-n>', '<cmd>Neotree<cr>', { silent = true })
 -- Greatest remap ever
 vim.keymap.set('x', '<space>p', '"_dP')
 
+-- get current buffer file path
+vim.keymap.set('n', '<space>;', ":lua print(vim.fn.expand('%'))<cr>")
+
 -- open Telescope
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
+
+-- Telescope maps
+vim.keymap.set('n', '<leader>gr', '<cmd>lua require"telescope.builtin".lsp_references()<cr>')
 
 -- open Terminal
 vim.keymap.set('n', '<leader>tt', '<cmd>FloatermNew<cr>')

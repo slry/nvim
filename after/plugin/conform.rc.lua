@@ -6,13 +6,14 @@ end
 conform.setup({
   formatters_by_ft = {
     python = { "autopep8", "autoflake" },
-    javascript = { "prettier" },
-    typescript = { "prettier" },
-    javascriptreact = { "prettier" },
-    typescriptreact = { "prettier" },
+    javascript = { "prettierd" },
+    typescript = { "prettierd" },
+    javascriptreact = { "prettierd" },
+    typescriptreact = { "prettierd" },
+    vue = { "prettier" }
   },
   format_on_save = {
-    timeout_ms = 500,
+    timeout_ms = 2500,
     lsp_fallback = true
   }
 })

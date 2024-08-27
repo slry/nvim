@@ -1,16 +1,26 @@
 vim.cmd([[packadd packer.nvim]])
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
+
 return require('packer').startup(function(use)
   -- packer
   use 'wbthomason/packer.nvim'
 
+  -- startup screen
+  use {
+    'goolord/alpha-nvim',
+    requires = {
+      'nvim-tree/nvim-web-devicons',
+      'nvim-lua/plenary.nvim'
+    },
+  }
+
   -- colorscheme
-  --use 'ellisonleao/gruvbox.nvim'
+  use 'ellisonleao/gruvbox.nvim'
 
   -- old vim
-  use 'morhetz/gruvbox'
-  use 'sainnhe/everforest'
+  --  use 'morhetz/gruvbox'
+  --  use 'sainnhe/everforest'
 
   -- lualine
   use {
@@ -46,7 +56,7 @@ return require('packer').startup(function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    tag = 'v0.9.0'
+    tag = 'v0.9.2'
   }
 
   -- terminal
@@ -111,4 +121,13 @@ return require('packer').startup(function(use)
 
   -- tmux integration
   use "christoomey/vim-tmux-navigator"
+
+  -- colorizer
+  use 'norcalli/nvim-colorizer.lua'
+
+  -- indents
+  use "lukas-reineke/indent-blankline.nvim"
+
+  -- comment
+  use 'numToStr/Comment.nvim'
 end)

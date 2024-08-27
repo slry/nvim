@@ -1,4 +1,6 @@
 vim.wo.number = true
+vim.wo.relativenumber = true
+vim.wo.wrap = false
 
 vim.o.mouse = "a"
 vim.o.completeopt = "menu,menuone,noselect"

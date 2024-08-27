@@ -32,12 +32,12 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 
   -- Autoformatting on saving
-  if client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_command [[augroup Format]]
-    vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format{async = false}]]
-    vim.api.nvim_command [[augroup END]]
-  end
+  --  if client.server_capabilities.documentFormattingProvider then
+  --    vim.api.nvim_command [[augroup Format]]
+  --    vim.api.nvim_command [[autocmd! * <buffer>]]
+  --    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format{async = false}]]
+  --    vim.api.nvim_command [[augroup END]]
+  --  end
 end
 
 local lsp_flags = {
@@ -98,20 +98,33 @@ local function filterReactDTS(value)
   return string.match(value.targetUri, 'react/index.d.ts') == nil
 end
 
+local function filterNodeModules(value)
+  return string.match(value.targetUri, 'node_modules') == nil
+end
+
 lsp.tsserver.setup({
   on_attach = on_attach,
   flags = lsp_flags,
   handlers = {
     ['textDocument/definition'] = function(err, result, method, ...)
       if vim.tbl_islist(result) and #result > 1 then
-        local filtered_result = filter(result, filterReactDTS)
+        local filtered_result = filter(result, filterNodeModules)
         return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
       end
 
       vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
     end
   },
-  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+  init_options = {
+    plugins = {
+      {
+        name = "@vue/typescript-plugin",
+        location = "/home/slrypc/.nvm/versions/node/v20.12.0/lib/node_modules/@vue/typescript-plugin",
+        languages = { "javascript", "typescript", "vue" },
+      },
+    },
+  },
+  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx', 'vue' },
   cmd = { "typescript-language-server", '--stdio' }
 })
 
@@ -143,4 +156,15 @@ lsp.yamlls.setup({
 lsp.ansiblels.setup({
   on_attach = on_attach,
   flags = lsp_flags,
+})
+
+lsp.volar.setup({
+  filetypes = { "typescript", "javascript", "vue" },
+  init_options = {
+    typescript = {
+      tsdk = '/home/slrypc/.nvm/versions/node/v20.12.0/lib/node_modules/typescript/lib'
+    }
+  },
+  on_attach = on_attach,
+  flags = lsp_flags
 })
