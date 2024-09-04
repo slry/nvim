@@ -29,9 +29,12 @@ vim.keymap.set('n', '<space>;', ":lua print(vim.fn.expand('%'))<cr>")
 
 -- open Telescope
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
+vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
+vim.keymap.set('n', '<leader>fb', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
 
 -- Telescope maps
 vim.keymap.set('n', '<leader>gr', '<cmd>lua require"telescope.builtin".lsp_references()<cr>')
+vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<cr>')
 
 -- open Terminal
 vim.keymap.set('n', '<leader>tt', '<cmd>FloatermNew<cr>')

@@ -10,7 +10,6 @@ nvimlint.linters_by_ft = {
   typescriptreact = { "eslint_d" },
   vue = { "eslint" },
   python = { "flake8" },
-  dockerfile = { "hadolint" },
   yaml = { "yamllint" },
   css = { "stylelint" }
 }
