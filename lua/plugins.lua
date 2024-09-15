@@ -1,6 +1,7 @@
 vim.cmd([[packadd packer.nvim]])
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
+vim.g.neo_tree_remove_legacy_commands = 1
+vim.g.copilot_proxy = vim.fn.readfile(vim.fn.expand("~/.copilot/.proxy"))[1]
 
 return require('packer').startup(function(use)
   -- packer
