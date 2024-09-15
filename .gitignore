@@ -1,3 +1,4 @@
 workspace
 plugin
 !after/plugin
+.copilot_proxy

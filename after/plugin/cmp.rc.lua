@@ -12,6 +12,9 @@ local has_words_before = function()
 end
 
 cmp.setup({
+  performance = {
+    max_view_entries = 7
+  },
   snippet = {
     expand = function(args)
       vim.fn['vsnip#anonymous'](args.body)
@@ -85,6 +88,7 @@ end)
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 local lsp = require('lspconfig')
 
 lsp.cssls.setup({
@@ -111,18 +115,6 @@ lsp.lua_ls.setup({
   capabilities = capabilities,
 })
 
-lsp.texlab.setup({
-  capabilities = capabilities,
-})
-
 lsp.html.setup({
-  capabilities = capabilities,
-})
-
-lsp.racket_langserver.setup({
-  capabilities = capabilities,
-})
-
-lsp.hls.setup({
   capabilities = capabilities,
 })

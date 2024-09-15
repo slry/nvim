@@ -30,14 +30,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-
-  -- Autoformatting on saving
-  --  if client.server_capabilities.documentFormattingProvider then
-  --    vim.api.nvim_command [[augroup Format]]
-  --    vim.api.nvim_command [[autocmd! * <buffer>]]
-  --    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format{async = false}]]
-  --    vim.api.nvim_command [[augroup END]]
-  --  end
 end
 
 local lsp_flags = {
@@ -47,74 +39,50 @@ local lsp_flags = {
 
 local lsp = require('lspconfig')
 
-lsp.pyright.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-})
+local basic_lsps = {
+  "tailwindcss",
+  "html",
+  "pyright",
+  "clangd",
+  "jdtls",
+  "dockerls",
+  "yamlls",
+  "ansiblels"
+}
 
-lsp.clangd.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-})
-
-lsp.jdtls.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-})
+for _, lsp_name in ipairs(basic_lsps) do
+  lsp[lsp_name].setup({
+    on_attach = on_attach,
+    flags = lsp_flags
+  })
+end
 
 lsp.lua_ls.setup({
   on_attach = on_attach,
   flags = lsp_flags,
   settings = {
     Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
       diagnostics = {
-        globals = { 'vim' }
-      }
+        globals = { 'vim', 'require' }
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
     }
   }
 })
 
-lsp.texlab.setup({
+lsp.ts_ls.setup({
   on_attach = on_attach,
   flags = lsp_flags,
-})
-
-local function filter(arr, fn)
-  if type(arr) ~= "table" then
-    return arr
-  end
-
-  local filtered = {}
-  for k, v in pairs(arr) do
-    if fn(v, k, arr) then
-      table.insert(filtered, v)
-    end
-  end
-
-  return filtered
-end
-
-local function filterReactDTS(value)
-  return string.match(value.targetUri, 'react/index.d.ts') == nil
-end
-
-local function filterNodeModules(value)
-  return string.match(value.targetUri, 'node_modules') == nil
-end
-
-lsp.tsserver.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-  handlers = {
-    ['textDocument/definition'] = function(err, result, method, ...)
-      if vim.tbl_islist(result) and #result > 1 then
-        local filtered_result = filter(result, filterNodeModules)
-        return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
-      end
-
-      vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
-    end
-  },
   init_options = {
     plugins = {
       {
@@ -128,36 +96,6 @@ lsp.tsserver.setup({
   cmd = { "typescript-language-server", '--stdio' }
 })
 
-lsp.tailwindcss.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-})
-
-lsp.racket_langserver.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-})
-
-lsp.hls.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-})
-
-lsp.dockerls.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-})
-
-lsp.yamlls.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-})
-
-lsp.ansiblels.setup({
-  on_attach = on_attach,
-  flags = lsp_flags,
-})
-
 lsp.volar.setup({
   filetypes = { "typescript", "javascript", "vue" },
   init_options = {
@@ -167,4 +105,15 @@ lsp.volar.setup({
   },
   on_attach = on_attach,
   flags = lsp_flags
+})
+
+lsp.cssls.setup({
+  flags = lsp_flags,
+  filetypes = { 'css', 'scss', 'less', 'module.css' }
+})
+
+lsp.cssmodules_ls.setup({
+  on_attach = on_attach,
+  flags = lsp_flags,
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
 })

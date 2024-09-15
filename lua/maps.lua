@@ -22,7 +22,7 @@ vim.keymap.set('n', '<leader>bc', ':%bd|e#<cr>', { silent = true })
 vim.keymap.set('n', '<C-n>', '<cmd>Neotree<cr>', { silent = true })
 
 -- Greatest remap ever
-vim.keymap.set('x', '<space>p', '"_dP')
+-- vim.keymap.set('x', '<space>p', '"_dP')
 
 -- get current buffer file path
 vim.keymap.set('n', '<space>;', ":lua print(vim.fn.expand('%'))<cr>")
@@ -70,3 +70,7 @@ vim.cmd([[
 
 -- autosession
 vim.keymap.set('n', '<leader>ss', require('auto-session.session-lens').search_session, { noremap = true })
+
+-- quickfix list maps
+vim.keymap.set('n', '<space>]', '<cmd>cnext<cr>')
+vim.keymap.set('n', '<space>[', '<cmd>cprev<cr>')

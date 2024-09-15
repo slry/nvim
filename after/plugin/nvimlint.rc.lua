@@ -8,10 +8,9 @@ nvimlint.linters_by_ft = {
   javascriptreact = { "eslint_d" },
   typescript = { "eslint" },
   typescriptreact = { "eslint_d" },
-  vue = { "eslint" },
+  vue = { "eslint_d" },
   python = { "flake8" },
   yaml = { "yamllint" },
-  css = { "stylelint" }
 }
 
 local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
