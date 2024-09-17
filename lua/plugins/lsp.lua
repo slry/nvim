@@ -96,7 +96,6 @@ return {
           local lsp = require('lspconfig')
           lsp.ts_ls.setup({
             on_attach = on_attach,
-            capabilities = capabilities,
             init_options = {
               plugins = {
                 {
@@ -121,9 +120,9 @@ return {
                 tsdk = node_path .. 'typescript/lib',
               }
             },
-            on_new_config = function(new_config, _)
-              new_config.init_options.typescript.tsdk = node_path .. 'typescript/lib'
-            end
+            -- on_new_config = function(new_config, _)
+            --   new_config.init_options.typescript.tsdk = node_path .. 'typescript/lib'
+            -- end
           })
         end,
 
