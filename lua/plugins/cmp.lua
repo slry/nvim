@@ -20,7 +20,7 @@ return {
 
     cmp.setup({
       performance = {
-        max_view_entries = 7
+        max_view_entries = 15
       },
       snippet = {
         expand = function(args)
@@ -90,30 +90,33 @@ return {
       vim.b.copilot_suggestion_hidden = false
     end)
 
-    -- CMP highlights
-    -- gray
-    vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = '#808080', bg = 'NONE' })
-    -- white
-    vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = '#ffffff', bg = 'NONE' })
-    -- red
-    vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = '#FB4934', bg = 'NONE' })
-    -- aqua
-    vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = '#83A598', bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = '#83A598', bg = 'NONE' })
-    -- purple
-    vim.api.nvim_set_hl(0, 'CmpItemKindModule', { fg = '#D3869B', bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = '#D3869B', bg = 'NONE' })
-    -- yellow
-    vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { fg = '#FABD2F', bg = 'NONE' })
-    -- aqua
-    vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = '#8EC07C', bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindField', { fg = '#8EC07C', bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { fg = '#8EC07C', bg = 'NONE' })
-    -- orange
-    vim.api.nvim_set_hl(0, 'CmpItemKindClass', { fg = '#FE8019', bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { fg = '#FE8019', bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { fg = '#FE8019', bg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = '#FE8019', bg = 'NONE' })
-    vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+    -- if colorscheme is gruvbox
+    if vim.g.colors_name == 'gruvbox' then
+      -- CMP highlights
+      -- gray
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = '#808080', bg = 'NONE' })
+      -- white
+      vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = '#ffffff', bg = 'NONE' })
+      -- red
+      vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = '#FB4934', bg = 'NONE' })
+      -- aqua
+      vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = '#83A598', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = '#83A598', bg = 'NONE' })
+      -- purple
+      vim.api.nvim_set_hl(0, 'CmpItemKindModule', { fg = '#D3869B', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = '#D3869B', bg = 'NONE' })
+      -- yellow
+      vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { fg = '#FABD2F', bg = 'NONE' })
+      -- aqua
+      vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = '#8EC07C', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindField', { fg = '#8EC07C', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { fg = '#8EC07C', bg = 'NONE' })
+      -- orange
+      vim.api.nvim_set_hl(0, 'CmpItemKindClass', { fg = '#FE8019', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { fg = '#FE8019', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { fg = '#FE8019', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = '#FE8019', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+    end
   end
 }

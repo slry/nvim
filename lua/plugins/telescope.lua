@@ -6,16 +6,21 @@ return {
     local actions = require('telescope.actions')
 
     telescope.setup({
-        defaults = {
-          file_ignore_patterns = { "node_modules", ".git" },
-          mappings = {
-            n = {
-              ["S"] = actions.select_horizontal,
-              ["s"] = actions.select_vertical
-            }
+      pickers = {
+        find_files = {
+          hidden = true
+        }
+      },
+      defaults = {
+        file_ignore_patterns = { "node_modules", ".git" },
+        mappings = {
+          n = {
+            ["S"] = actions.select_horizontal,
+            ["s"] = actions.select_vertical
           }
         }
-      })
+      }
+    })
 
     -- open Telescope
     vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
@@ -25,6 +30,5 @@ return {
     -- Telescope maps
     vim.keymap.set('n', '<leader>gr', '<cmd>lua require"telescope.builtin".lsp_references()<cr>')
     vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<cr>')
-
   end
 }

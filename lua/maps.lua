@@ -38,3 +38,6 @@ vim.keymap.set('n', '<leader>hs', ':split<cr>')
 -- quickfix list maps
 vim.keymap.set('n', '<space>]', '<cmd>cnext<cr>')
 vim.keymap.set('n', '<space>[', '<cmd>cprev<cr>')
+
+-- reload lsp
+vim.keymap.set('n', '<leader>r', '<cmd>LspRestart<cr>')

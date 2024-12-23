@@ -3,11 +3,11 @@ return {
   config = function()
     local nvimlint = require("lint")
     nvimlint.linters_by_ft = {
-      javascript = { "eslint_d" },
-      javascriptreact = { "eslint_d" },
+      javascript = { "eslint" },
+      javascriptreact = { "eslint" },
       typescript = { "eslint" },
-      typescriptreact = { "eslint_d" },
-      vue = { "eslint_d" },
+      typescriptreact = { "eslint" },
+      vue = { "eslint" },
       python = { "flake8" },
       yaml = { "yamllint" },
     }
@@ -16,7 +16,10 @@ return {
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       group = lint_augroup,
       callback = function()
-        nvimlint.try_lint()
+        local get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients
+        local client = get_clients({ bufnr = 0 })[1] or {}
+
+        nvimlint.try_lint(nil, { cwd = client.root_dir })
       end,
     })
   end

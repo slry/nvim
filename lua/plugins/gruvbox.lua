@@ -28,7 +28,4 @@ return {
     dim_inactive = false,
     transparent_mode = true,
   },
-  config = function()
-    vim.cmd([[colorscheme gruvbox]])
-  end
 }

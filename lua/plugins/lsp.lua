@@ -96,33 +96,10 @@ return {
           local lsp = require('lspconfig')
           lsp.ts_ls.setup({
             on_attach = on_attach,
-            init_options = {
-              plugins = {
-                {
-                  name = "@vue/typescript-plugin",
-                  location = node_path .. '@vue/typescript-plugin',
-                  languages = { "javascript", "typescript", "vue" },
-                },
-              },
-            },
+            root_dir = require("lspconfig.util").root_pattern(".git"),
+            single_file_support = false,
             filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx', 'vue' },
             cmd = { "typescript-language-server", '--stdio' },
-          })
-        end,
-
-        ["volar"] = function()
-          local lsp = require('lspconfig')
-          lsp.volar.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            init_options = {
-              typescript = {
-                tsdk = node_path .. 'typescript/lib',
-              }
-            },
-            -- on_new_config = function(new_config, _)
-            --   new_config.init_options.typescript.tsdk = node_path .. 'typescript/lib'
-            -- end
           })
         end,
 

@@ -3,7 +3,6 @@ return {
   dependencies = { 'kyazdani42/nvim-web-devicons' },
   opts = {
     options = {
-      theme = 'gruvbox',
       section_separators = { left = '', right = '' },
       component_separators = { left = '', right = '' },
       icons_enabled = true,

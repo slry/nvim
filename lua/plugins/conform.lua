@@ -7,7 +7,8 @@ return {
       typescript = { "prettierd", "eslint_d" },
       javascriptreact = { "prettierd", "eslint_d" },
       typescriptreact = { "prettierd", "eslint_d" },
-      vue = { "prettier", "eslint_d" }
+      vue = { "prettier", "eslint" },
+      css = { "prettierd" }
     },
     format_on_save = {
       timeout_ms = 2500,

@@ -9,6 +9,9 @@ require('lazy').setup({
   spec = {
     { import = 'plugins' }
   },
-  checker = { enabled = true},
+  checker = { enabled = true },
   change_detection = { enabled = true, notify = false }
 })
+
+-- set colorscheme
+vim.cmd("colorscheme duskfox")
