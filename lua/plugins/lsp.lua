@@ -46,8 +46,9 @@ return {
     require("fidget").setup({})
     require("mason").setup()
     require("mason-lspconfig").setup({
+      automatic_installation = true,
       ensure_installed = {
-        "ts_ls",
+        -- "ts_ls",
         "lua_ls",
         "tailwindcss",
         "cssmodules_ls",
@@ -92,16 +93,16 @@ return {
           })
         end,
 
-        ["ts_ls"] = function()
-          local lsp = require('lspconfig')
-          lsp.ts_ls.setup({
-            on_attach = on_attach,
-            root_dir = require("lspconfig.util").root_pattern(".git"),
-            single_file_support = false,
-            filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx', 'vue' },
-            cmd = { "typescript-language-server", '--stdio' },
-          })
-        end,
+        -- ["ts_ls"] = function()
+        --   local lsp = require('lspconfig')
+        --   lsp.ts_ls.setup({
+        --     on_attach = on_attach,
+        --     root_dir = require("lspconfig.util").root_pattern(".git"),
+        --     single_file_support = false,
+        --     filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx', 'vue' },
+        --     cmd = { "typescript-language-server", '--stdio' },
+        --   })
+        -- end,
 
         ["cssls"] = function()
           local lsp = require('lspconfig')

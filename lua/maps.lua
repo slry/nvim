@@ -40,4 +40,7 @@ vim.keymap.set('n', '<space>]', '<cmd>cnext<cr>')
 vim.keymap.set('n', '<space>[', '<cmd>cprev<cr>')
 
 -- reload lsp
-vim.keymap.set('n', '<leader>r', '<cmd>LspRestart<cr>')
+vim.keymap.set('n', '<leader>r', '<cmd>LspRestart<cr>', { silent = true })
+
+-- nohlsearch on ESC
+vim.keymap.set('n', '<Esc>', ':nohlsearch<cr>', { silent = true })

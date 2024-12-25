@@ -1,6 +1,7 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
+  lazy = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -18,7 +19,7 @@ return {
     vim.api.nvim_set_hl(0, 'NeoTreeDir-shared', { fg = '#6B3C3F' })
 
     local fsd_hls = {
-      app = { 'app', 'application' },
+      app = { 'app' },
       pages = { 'pages', 'views' },
       widgets = { 'widgets' },
       features = { 'features' },
@@ -27,7 +28,7 @@ return {
     }
 
     local function get_hl(node_name, dir, hl)
-      if string.match(node_name, dir) then
+      if node_name == dir then
         return 'NeoTreeDir-' .. hl
       end
 
