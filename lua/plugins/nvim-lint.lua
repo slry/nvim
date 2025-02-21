@@ -3,11 +3,11 @@ return {
   config = function()
     local nvimlint = require("lint")
     nvimlint.linters_by_ft = {
-      javascript = { "eslint" },
-      javascriptreact = { "eslint" },
-      typescript = { "eslint" },
-      typescriptreact = { "eslint" },
-      vue = { "eslint" },
+      -- javascript = { "eslint_d" },
+      -- javascriptreact = { "eslint_d" },
+      -- typescript = { "eslint_d" },
+      -- typescriptreact = { "eslint_d" },
+      -- vue = { "eslint_d" },
       python = { "flake8" },
       yaml = { "yamllint" },
     }

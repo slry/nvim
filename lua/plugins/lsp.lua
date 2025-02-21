@@ -46,22 +46,43 @@ return {
     require("mason-lspconfig").setup({
       automatic_installation = true,
       ensure_installed = {
-        "vtsls",
+        -- "vtsls",
         "lua_ls",
-        "cssmodules_ls",
-        "cssls",
         "html",
         "clangd",
         "dockerls",
         "yamlls",
-        "volar",
+        -- "volar",
+        -- "cssmodules_ls",
+        -- "cssls",
       },
       handlers = {
         function(server_name) -- default handler (optional)
-          require("lspconfig")[server_name].setup {
-            capabilities = capabilities,
-            on_attach = on_attach,
-          }
+            require("lspconfig")[server_name].setup {
+              capabilities = capabilities,
+              on_attach = on_attach,
+            }
+        end,
+
+        ["eslint"] = function()
+          local lsp = require('lspconfig')
+          lsp.eslint.setup({
+            on_attach = function()
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                group = vim.api.nvim_create_augroup("EslintFixAll", { clear = true }),
+                pattern = { "*.tsx", "*.ts", "*.jsx", "*.js" },
+                command = "silent! EslintFixAll",
+              })
+            end,
+            root_dir = lsp.util.root_pattern(
+              '.eslintrc',
+              '.eslintrc.js',
+              '.eslintrc.cjs',
+              '.eslintrc.yaml',
+              '.eslintrc.yml',
+              '.eslintrc.json',
+              '.prettierrc.js'),
+          })
         end,
 
         ["lua_ls"] = function()
@@ -87,15 +108,6 @@ return {
                 },
               }
             }
-          })
-        end,
-
-        ["cssls"] = function()
-          local lsp = require('lspconfig')
-          lsp.cssls.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            filetypes = { 'css' },
           })
         end,
       }
