@@ -21,7 +21,7 @@ return {
 
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
       vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
       -- Mappings.
@@ -46,7 +46,8 @@ return {
     require("mason-lspconfig").setup({
       automatic_installation = true,
       ensure_installed = {
-        -- "vtsls",
+        "vtsls",
+        "eslint",
         "lua_ls",
         "html",
         "clangd",
@@ -58,30 +59,17 @@ return {
       },
       handlers = {
         function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup {
-              capabilities = capabilities,
-              on_attach = on_attach,
-            }
+          require("lspconfig")[server_name].setup {
+            capabilities = capabilities,
+            on_attach = on_attach,
+          }
         end,
 
-        ["eslint"] = function()
+        ['vtsls'] = function()
           local lsp = require('lspconfig')
-          lsp.eslint.setup({
-            on_attach = function()
-              vim.api.nvim_create_autocmd("BufWritePre", {
-                group = vim.api.nvim_create_augroup("EslintFixAll", { clear = true }),
-                pattern = { "*.tsx", "*.ts", "*.jsx", "*.js" },
-                command = "silent! EslintFixAll",
-              })
-            end,
-            root_dir = lsp.util.root_pattern(
-              '.eslintrc',
-              '.eslintrc.js',
-              '.eslintrc.cjs',
-              '.eslintrc.yaml',
-              '.eslintrc.yml',
-              '.eslintrc.json',
-              '.prettierrc.js'),
+          lsp.vtsls.setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
           })
         end,
 

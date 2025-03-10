@@ -8,10 +8,11 @@ return {
   config = function()
     require("nvim-tree").setup {
       view = {
-        width = 60
+        width = 40
       }
     }
 
     vim.keymap.set('n', '<C-n>', '<cmd>NvimTreeOpen<cr>', { silent = true })
+    vim.keymap.set('n', '<leader>ft', '<cmd>NvimTreeFindFile<cr>', { silent = true })
   end,
 }

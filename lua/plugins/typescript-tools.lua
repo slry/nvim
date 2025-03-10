@@ -1,11 +1,17 @@
 return {
   "pmizio/typescript-tools.nvim",
-  enabled = false,
   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   opts = {},
+  enabled = false,
   config = function()
+    local api = require("typescript-tools.api")
     require("typescript-tools").setup({
-      single_file_support = false,
+      handlers = {
+        ["textDocument/publishDiagnostics"] = api.filter_diagnostics(
+        -- Ignore 'This may be converted to an async function' diagnostics.
+          { 6133, 6196 }
+        ),
+      },
     })
   end
 }

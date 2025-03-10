@@ -1,6 +1,5 @@
 return {
   'github/copilot.vim',
-  enabled = false,
   init = function()
     vim.g.copilot_proxy = vim.fn.readfile(vim.fn.expand("~/.copilot/.proxy"))[1]
     vim.cmd([[

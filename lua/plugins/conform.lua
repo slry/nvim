@@ -3,10 +3,10 @@ return {
   opts = {
     formatters_by_ft = {
       python = { "autopep8", "autoflake" },
-      javascript = { "prettierd" },
-      typescript = { "prettierd" },
-      javascriptreact = { "prettierd" },
-      typescriptreact = { "prettierd" },
+      javascript = { "eslint", "prettierd" },
+      typescript = { "eslint", "prettierd" },
+      javascriptreact = { "eslint", "prettierd" },
+      typescriptreact = { "eslint", "prettierd" },
       -- vue = { "prettier", "eslint_d" },
       css = { "prettierd" }
     },

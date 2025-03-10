@@ -17,12 +17,6 @@ return {
         load_on_setup = true,
         theme_conf = { border = true, winblend = 0, previewer = false, shorten_path = true },
       },
-      pre_save_cmds = {
-        function()
-          require 'neo-tree.sources.manager'.close_all()
-        end,
-      },
-
     })
 
     vim.keymap.set('n', '<leader>ss', require('auto-session.session-lens').search_session, { noremap = true })
