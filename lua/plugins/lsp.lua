@@ -39,6 +39,7 @@ return {
       vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
       vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
       vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+      vim.keymap.set('n', '<space>gd', vim.lsp.buf.definition, bufopts)
     end
 
     require("fidget").setup({})
@@ -53,9 +54,6 @@ return {
         "clangd",
         "dockerls",
         "yamlls",
-        -- "volar",
-        -- "cssmodules_ls",
-        -- "cssls",
       },
       handlers = {
         function(server_name) -- default handler (optional)
@@ -65,11 +63,90 @@ return {
           }
         end,
 
+        ['eslint'] = function()
+          local lsp = require('lspconfig')
+          lsp.eslint.setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
+            settings = {
+              enabled = false,
+              workingDirectories = { mode = 'auto' },
+            },
+            flags = {
+              debounce_text_changes = 1000,
+              allow_incremental_sync = false,
+            }
+          })
+        end,
+
         ['vtsls'] = function()
           local lsp = require('lspconfig')
           lsp.vtsls.setup({
+            init_options = { hostInfo = 'neovim' },
             on_attach = on_attach,
             capabilities = capabilities,
+            settings = {
+              typescript = {
+                tsserver = {
+                  maxTsServerMemory = 8192,
+                  useSeparateSyntaxServer = false,
+                  useSyntaxServer = 'never',
+                  experimental = {
+                    enableProjectDiagnostics = true,
+                  }
+                },
+                inlayHints = {
+                  parameterNames = { enabled = "literals" },
+                  parameterTypes = { enabled = true },
+                  variableTypes = { enabled = true },
+                  propertyDeclarationTypes = { enabled = true },
+                  functionLikeReturnTypes = { enabled = true },
+                  enumMemberValues = { enabled = true },
+                }
+              },
+            },
+            handlers = {
+              ["textDocument/publishDiagnostics"] = function(
+                  _,
+                  result,
+                  ctx,
+                  config
+              )
+                if result.diagnostics == nil then
+                  return
+                end
+
+                local ignoreCodes = {
+                  80001, -- File is a CommonJS module; it may be converted to an ES module.
+                  6133,  -- 'x' is declared but its value is never read.
+                  6196,  -- 'x' is declared but its value is never used.
+                }
+
+                -- ignore some tsserver diagnostics
+                local idx = 1
+                while idx <= #result.diagnostics do
+                  local entry = result.diagnostics[idx]
+
+                  local formatter = require('format-ts-errors')[entry.code]
+                  entry.message = formatter and formatter(entry.message) or entry.message
+
+                  -- codes: https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
+                  if vim.tbl_contains(ignoreCodes, entry.code) then
+                    table.remove(result.diagnostics, idx)
+                  else
+                    idx = idx + 1
+                  end
+                end
+
+                vim.lsp.diagnostic.on_publish_diagnostics(
+                  _,
+                  result,
+                  ctx,
+                  config
+                )
+              end,
+            },
+
           })
         end,
 
