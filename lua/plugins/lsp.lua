@@ -21,9 +21,7 @@ return {
 
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-    local on_attach = function(client, bufnr)
-      vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
+    local on_attach = function(_, bufnr)
       -- Mappings.
       local bufopts = { noremap = true, silent = true, buffer = bufnr }
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
@@ -47,8 +45,6 @@ return {
     require("mason-lspconfig").setup({
       automatic_installation = true,
       ensure_installed = {
-        "vtsls",
-        "eslint",
         "lua_ls",
         "html",
         "clangd",
@@ -63,22 +59,6 @@ return {
           }
         end,
 
-        ['eslint'] = function()
-          local lsp = require('lspconfig')
-          lsp.eslint.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            settings = {
-              enabled = false,
-              workingDirectories = { mode = 'auto' },
-            },
-            flags = {
-              debounce_text_changes = 1000,
-              allow_incremental_sync = false,
-            }
-          })
-        end,
-
         ['vtsls'] = function()
           local lsp = require('lspconfig')
           lsp.vtsls.setup({
@@ -86,6 +66,9 @@ return {
             on_attach = on_attach,
             capabilities = capabilities,
             settings = {
+              vtsls = {
+                autoUseWorkspaceTsdk = false
+              },
               typescript = {
                 tsserver = {
                   maxTsServerMemory = 8192,

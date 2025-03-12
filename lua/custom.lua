@@ -8,12 +8,16 @@ autocmd("BufRead", {
 
 })
 
+-- UPD: I HATE MYSELF FOR DOING THIS
+-- I LOST COUNTLESS HOURS TRYING TO FIGURE OUT WHY LSP DOESN'T WORK IN NODE_MODULES
+-- AND IT WAS BECAUSE OF THIS SHITTY SHIT
+--
 -- stop LSP for node_modules
-autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = '*/node_modules/*',
-  callback = function()
-    vim.defer_fn(function()
-      vim.cmd 'LspStop'
-    end, 1000)
-  end
-})
+-- autocmd({ 'BufRead', 'BufNewFile' }, {
+--   pattern = '*/node_modules/*',
+--   callback = function()
+--     vim.defer_fn(function()
+--       vim.cmd 'LspStop'
+--     end, 1000)
+--   end
+-- })
