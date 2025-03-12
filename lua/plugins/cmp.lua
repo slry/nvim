@@ -66,6 +66,12 @@ return {
         { name = 'path' },
         { name = 'buffer' }
       }),
+      window = {
+        completion = cmp.config.window.bordered({
+          side_padding = 0
+        }),
+        documentation = cmp.config.window.bordered(),
+      }
     })
 
     cmp.setup.cmdline({ '/', '?' }, {
