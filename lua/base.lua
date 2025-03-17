@@ -1,5 +1,6 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.g.snacks_animate = false
 
 vim.wo.number = true
 vim.wo.relativenumber = true

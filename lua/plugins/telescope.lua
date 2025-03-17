@@ -17,7 +17,7 @@ return {
         }
       },
       defaults = {
-        file_ignore_patterns = { "node_modules", ".git" },
+        file_ignore_patterns = { "node_modules", ".git", ".png", ".ttf" },
         mappings = {
           n = {
             ["S"] = actions.select_horizontal,
